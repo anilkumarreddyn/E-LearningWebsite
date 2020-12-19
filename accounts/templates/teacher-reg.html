@@ -1,0 +1,321 @@
+{% extends 'layout.html' %}
+{% block title %}Teacher's Registration Form{% endblock %}
+{% block body %}
+
+{% block css %}
+<style>
+  body{
+    background-image: url('/static/img/teacher1.jpg');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    
+  }
+
+    .card{
+        background-color: rgb(122, 121, 121);
+        box-shadow: -5px -5px 10px rgb(56, 56, 55), 5px 5px 10px rgb(56, 56, 55), inset -5px -5px 10px rgb(56, 56, 55); ;
+        
+    }
+    #teacherForm{
+        width: 50%;
+        margin-right: 2%;
+    }
+    .navbar{
+        box-shadow: 10px 10px 10px rgb(73, 73, 73);
+    }
+
+
+@media (max-width: 320px) {
+    #teacherForm{
+        width: 97%
+    }
+}
+@media (min-width: 375px) {
+    #teacherForm{
+        width: 90%
+    }
+}
+@media (min-width: 360px) {
+    #teacherForm{
+        width: 90%
+    }
+}
+
+@media (min-width: 425px) {
+    #teacherForm{
+        width: 90%
+    }
+}
+@media (min-width: 768px) {
+    #teacherForm{
+        width: 70%
+    }
+}
+@media (min-width: 1024px) {
+    #teacherForm{
+        width: 50%
+    }
+}
+
+
+</style>
+{% endblock %}
+
+<!--GlobalMessages-->
+
+<div class="container mt-24 pt-5 mb-16" id='teacherForm'>
+    <div class="row">
+        <div class="col-md-12">
+            <!--Featured-->
+            <div class="Featured">
+            </div>
+            <!-- View: /Themes/UmsBd/Shared/Layouts/Parts/_Featured.cshtml-->
+
+            <div class="card mr-auto">
+                <div class="card-header bg-dark" style='box-shadow: inset 0 0 50px rgb(0, 0, 0);'>
+                    <p class='text-center  text-light' style='font-size: 30px; font-family: Cambria;'><strong>Registration</strong></p>
+                </div>
+                <div class="card-body"  style='box-shadow: inset 0 0 200px rgb(255, 255, 255)'>
+                    <form id="teacherRegistrationForm" class="form-horizontal" method="post"action="">
+                        {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                          {{ message }}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                  
+                        <div class="col-sm-12 pull-left">
+                            <div class="col-md-12">
+                                <span asp-validation-summary="ValidationSummary.All" class="text-danger"></span>
+                                <input type="hidden" id="Id" name="Id" value="0" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Name</strong></label>
+                                <div class="col-md-9 ml-auto d-flex">
+                                    <input type="text" class="form-control mr-3" autocomplete="off"
+                                        placeholder="Enter First Name" id="FullName" name="fname" value="">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Last Name" id="FullName" name="lname" value="">
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="FullName"
+                                        data-valmsg-replace="true" required></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Contact</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Mobile Number" data-val="true"
+                                        data-val-required="The Mobile Number 1 field is required." id="MobileNumber1"
+                                        name="MobileNumber1" value="" required />
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="MobileNumber1"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Urgent Contact</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Mobile Number" id="MobileNumber2" name="MobileNumber2"
+                                        value="" required />
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="MobileNumber2"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Email</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Valid Email" data-val="true"
+                                        data-val-required="The Email Address field is required." id="EmailAddress"
+                                        name="EmailAddress" value=""  required/>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="EmailAddress"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 text-dark"><strong>Facebook</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Facebook Id (Optional)" id="FacebookId" name="FacebookId"
+                                        value="" />
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="FacebookId"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 text-dark"><strong>Institute</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Institute Name" data-val="true"
+                                        data-val-required="The Institute field is required." id="Institute"
+                                        name="Institute" value=""  required/>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Institute"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Dept.</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Department Name" data-val="true"
+                                        data-val-required="The Department field is required." id="Department"
+                                        name="Department" value=""  required/>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Department"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>HSC Pass</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Enter Hsc Passing Year" data-val="true"
+                                        data-val-required="The HSC Passing Year field is required." id="HscPassingYear"
+                                        name="HscPassingYear" value=""  required />
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="HscPassingYear"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Link</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Zoom/Google Meet Link" data-val="true"
+                                        data-val-required="Link field is required." id="HscPassingYear"
+                                        name="classlink" value=""  required />
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="classlink"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Religion</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <select id="SelectedReligion" class="form-control" data-val="true"
+                                        data-val-required="The Religion field is required." name="Religion" required>
+                                        <option>--Select Religion--</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Hinduism">Hinduism</option>
+                                        <option value="Christianity">Christianity</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Religion"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Gender</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <select id="SelectedReligion" class="form-control" data-val="true"
+                                        data-val-required="The Gender field is required." name="Gender" required>
+                                        <option>--Select Gender--</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Gender"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Subject</strong></label>
+                                <div class="col-md-9 ml-auto form-row">
+                                    <div class="col-md-4" style="padding-left: 0">
+                                        <select id="Subject1" class="form-control" data-val="true"
+                                            data-val-required="The Subject Priority field is required." name="Subject1" required>
+                                            <option>--Choice 1--</option>
+                                            {% for subject in subjects %}
+                                            <option value="{{subject.name}}">{{subject.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="Subject1"
+                                            data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0">
+                                        <select id="Subject2" class="form-control" name="Subject2">
+                                            <option>--Choice 2 (Optional)--</option>
+                                            {% for subject in subjects %}
+                                            <option value="{{subject.name}}">{{subject.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4" style="padding-right: 0">
+                                        <select id="Subject3" class="form-control" name="Subject3">
+                                            <option>--Choice 3 (Optional)--</option>
+                                            {% for subject in subjects %}
+                                            <option value="{{subject.name}}">{{subject.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-2 text-dark"><strong>Version Priority</strong></label>
+                                <div class="col-md-9 ml-auto form-row">
+                                    <div class="col-md-4" style="padding-left: 0">
+                                        <select id="VersionPriority1" class="form-control" data-val="true"
+                                            data-val-required="The Version Priority field is required."
+                                            name="VersionPriority1" required>
+                                            <option>--Choice 1--</option>
+                                            <option value="BV">Bangla</option>
+                                            <option value="EV">English</option>
+                                        </select>
+                                        <span class="text-danger field-validation-valid"
+                                            data-valmsg-for="VersionPriority1" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="col-md-4" style="padding: 0">
+                                        <select id="VersionPriority2" class="form-control" name="VersionPriority2">
+                                            <option>--Choice 2 (Optional)--</option>
+                                            <option value="BV">Bangla</option>
+                                            <option value="EV">English</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 text-dark"><strong>Why should we hire you?
+                                    :</strong></label>
+                                <div class="col-md-9 ml-auto">
+                                    <input type="text" class="form-control" autocomplete="off"
+                                        placeholder="Why should we appoint you as a teacher?" data-val="true"
+                                        data-val-required="The Why should we appoint you as a teacher? field is required."
+                                        id="AppointmentRemarks" name="AppointmentRemarks" value="" required />
+                                    <span class="text-danger field-validation-valid"
+                                        data-valmsg-for="AppointmentRemarks" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-6 text-center">
+                                    <input type="submit" class="btn btn-lg btn-danger" value="Submit" style='border-radius: 20px; box-shadow: 5px 5px 10px rgb(77, 75, 75), inset -5px -10px 10px rgb(133, 11, 11);'/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function (e) {
+
+                });
+
+                function PopulateDropdownCtrl() {
+
+                }
+            </script>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

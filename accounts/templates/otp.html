@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block title %}Verification{% endblock %}
+{% block body %}
+
+<div class='container messageboxes alert alert-dark px-5 animate__animated animate__bounceInDown' id='alertbox' style="box-shadow: 10px 10px 10px 5px rgb(71, 70, 70); margin-top: 20%; margin-bottom: 20%; width: 50%;">
+    <strong>
+      <button type="button" class="close" onclick='raiseAlert()'>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class='text-xl'>Email Verification</p>
+      <hr>
+      <form action="/accounts/confirmRegistration/{{username}}" method='POST' class='form-inline'>
+        {% csrf_token %}
+        <p class='my-2'>Please Enter the Verification code we have sent to your email to activate your account.</p>
+        <input type="text" name='otp' class='form-control m-3'>
+        <button class='btn btn-danger ml-2'>Verify</button>
+    </form>
+    
+    </strong>
+</div>  
+
+
+{% endblock %}

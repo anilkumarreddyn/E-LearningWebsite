@@ -1,0 +1,680 @@
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>User's Dashboard</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
+
+        
+    <style>
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: .875rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#subjRecords{
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+#studentRecords{
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+
+}
+#teacherRecords{
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+
+}
+#teacherreg{
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+
+}
+#contactRecords{
+  display: block;
+  height: 400px;
+  overflow-y: scroll;
+
+}
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+  </head>
+  <body id='body'>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/">Imperia - Admin</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+
+      <a class="nav-link" href="/accounts/logout">Log out</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin">
+              <span data-feather="home"></span>
+              Admin Dashboard 2<span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#studentRecords">
+              <span data-feather="file"></span>
+              Students Database
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='#teacherReg'>
+              <span data-feather="shopping-cart"></span>
+              Teachers Database
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#subjRecords">
+              <span data-feather="users"></span>
+              Courses Database
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Question Bank
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='#teacherRecords'>
+              <span data-feather="file-text"></span>
+              Applications for Teachers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <span data-feather="file-text"></span>
+              Reports and Complaints
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contactRecords">
+              <span data-feather="file-text"></span>
+              Messages
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/send_mail_newsletter">
+              <span data-feather="file-text"></span>
+              Newsletter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              Students with dues
+            </a>
+          </li>
+          <br><br>
+          <li class="nav-item">
+            <a class="nav-link text-primary" href="/">
+              <span data-feather="file-text"></span>
+              Redirect to Home Page
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Admin Dashboard</h1>
+      </div>
+
+
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      
+      <!-- the main content -->
+      <div class="my-4 w-100 row row-cols-1 row-cols-sm-2 row-cols-md-4" width="900" height="380" id='overview'>
+        <div class="card text-white bg-primary mb-3 col m-3" style="max-width: 13rem;">
+          <h5 class="card-header">Total Students</h5>
+          <div class="card-body">
+            <h5 class="card-text text-center" style="font-size: 55px;">{{students.count}}</h5>
+          </div>
+        </div>
+        <div class="card text-dark bg-warning mb-3 col m-3" style="max-width: 13rem;">
+          <h5 class="card-header">Total Teachers</h5>
+          <div class="card-body">
+            <h5 class="card-text text-center" style="font-size: 55px;">{{teachersreg.count}}</h5>
+          </div>
+        </div>
+        <div class="card text-white bg-danger mb-3 col m-3" style="max-width: 13rem;">
+          <h5 class="card-header">Total Courses</h5>
+          <div class="card-body">
+            <h5 class="card-text text-center my-auto" style="font-size: 55px;">{{courses.count}}</h5>
+          </div>
+        </div>
+      </div>
+      
+      
+      <!-- The optional table -->
+      <div class='my-5'>
+      <div id='studentRecords'>
+      <h2 style="font-size: 30px;" class='mt-24'>Student Records</h2>
+      <div class="table-responsive mb-4 mt-4">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Address</th>
+              <th>Enrolled</th>
+              <th>Results</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in students %}
+            <tr>
+              <td></td>
+              <td>{{student.fname}} {{student.lname}}</td>
+              <td>{{student.contact}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.username}}</td>
+              <td>{{student.password}}</td>
+              <td>{{student.address}}</td>
+              <td>{{student.enrolled}}</td>
+              <td>{{student.results}}</td>
+              <td>{{student.points}}</td>
+              <td><a class='btn btn-danger btn-sm' onclick="return confirm('Are you sure you want to delete All the record of this student?')" href='/accounts/deleteStudent/{{student.username}}'>Delete</a></td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+
+      </div>
+
+
+
+        <div class="table-responsive mb-4 mt-4"  id='teacherRecords'>
+          <h2 style="font-size: 30px;" class='mt-4'>Teacher Applicants</h2>
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact -1 </th>
+                <th>Contact -2 </th>
+                <th>Email</th>
+                <th>Facebook</th>
+                <th>Institute</th>
+                <th>Dept</th>
+                <th>HSC Pass</th>
+                <th>Religion</th>
+                <th>Gender</th>
+                <th>Subj1</th>
+                <th>Subj2</th>
+                <th>Subj3</th>
+                <th>Version1</th>
+                <th>Version2</th>
+                <th>Explanations</th>
+                <th>Date of Application</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for teacher in teachers %}
+              <tr>
+                <td></td>
+                <td>{{teacher.fname}} {{teacher.lname}}</td>
+                <td>{{teacher.contact1}}</td>
+                <td>{{teacher.contact2}}</td>
+                <td>{{teacher.email}}</td>
+                <td>{{teacher.facebook}}</td>
+                <td>{{teacher.institute}}</td>
+                <td>{{teacher.dept}}</td>
+                <td>{{teacher.hscPass}}</td>
+                <td>{{teacher.religion}}</td>
+                <td>{{teacher.gender}}</td>
+                <td>{{teacher.subject1}}</td>
+                <td>{{teacher.subject2}}</td>
+                <td>{{teacher.subject3}}</td>
+                <td>{{teacher.vers1}}</td>
+                <td>{{teacher.vers2}}</td>
+                <td>{{teacher.appointment}}</td>
+                <td>{{teacher.date_of_apply}}</td>
+                <td><button class='btn btn-primary btn-sm' data-toggle="modal" data-target="#exampleModal{{forloop.counter}}">Hire</button></td>
+                <td><a class='btn btn-danger btn-sm' onclick="return confirm('Are you sure you want to delete the record of this applicant?')" href='/accounts/deleteApplicant/{{teacher.email}}'>Delete</a></td>
+
+              </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm Teacher</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/accounts/confirmTeacher/{{teacher.email}}" method="post">
+                          {% csrf_token %}
+                          <input type="text" name='pay' class='form-control' placeholder="Pay">
+                          <div>
+                          <select name="subject1" class='form-control'>
+                            {% for subj in subjects %}
+                            <option value="{{subj.slug}}">{{subj.name}}</option>
+                            {% endfor %}
+                          </select>
+                          <select name="subject2" class='form-control'>
+                            {% for subj in subjects %}
+                            <option value="{{subj.slug}}">{{subj.name}}</option>
+                            {% endfor %}
+                          </select>
+                          <select name="subject3" class='form-control'>
+                            {% for subj in subjects %}
+                            <option value="{{subj.slug}}">{{subj.name}}</option>
+                            {% endfor %}
+                          </select>
+                          </div>
+                          <select name="version" class='form-control'>
+                            <option value="EV">English</option>
+                            <option value="BV">Bangla</option>
+                          </select>
+                          <button class='btn btn-primary'>Hire</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    
+              {% endfor %}
+            </tbody>
+          </table>
+          </div>
+
+
+
+
+          <div class="table-responsive mb-4 mt-4"  id='teacherReg'>
+            <h2 style="font-size: 30px;" class='mt-4'>Registered Teachers</h2>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Contact -1 </th>
+                  <th>Contact -2 </th>
+                  <th>Email</th>
+                  <th>Facebook</th>
+                  <th>Institute</th>
+                  <th>Dept</th>
+                  <th>HSC Pass</th>
+                  <th>Religion</th>
+                  <th>Gender</th>
+                  <th>Subj1</th>
+                  <th>Subj2</th>
+                  <th>Subj3</th>
+                  <th>Version1</th>
+                  <th>Version2</th>
+                  <th>Explanations</th>
+                  <th>Date of Application</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for teacherreg in teachersreg %}
+                <tr>
+                  <td></td>
+                  <td>{{teacherreg.fname}} {{teacherreg.lname}}</td>
+                  <td>{{teacherreg.contact1}}</td>
+                  <td>{{teacherreg.contact2}}</td>
+                  <td>{{teacherreg.email}}</td>
+                  <td>{{teacherreg.facebook}}</td>
+                  <td>{{teacherreg.institute}}</td>
+                  <td>{{teacherreg.dept}}</td>
+                  <td>{{teacherreg.hscPass}}</td>
+                  <td>{{teacherreg.religion}}</td>
+                  <td>{{teacherreg.gender}}</td>
+                  <td>{{teacherreg.subject1}}</td>
+                  <td>{{teacherreg.subject2}}</td>
+                  <td>{{teacherreg.subject3}}</td>
+                  <td>{{teacherreg.vers1}}</td>
+                  <td>{{teacherreg.vers2}}</td>
+                  <td>{{teacherreg.appointment}}</td>
+                  <td>{{teacherreg.date_of_apply}}</td>
+                  <td>{{teacherreg.username}}</td>
+                  <td>{{teacherreg.password}}</td>
+                  <td><a class='btn btn-danger btn-sm' onclick="return confirm('Are you sure you want to delete the record of the Teacher?')" href='/accounts/deleteTeacher/{{teacher.email}}'>Delete</a></td>
+  
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            </div>
+  
+
+
+
+
+
+
+
+          <div class="table-responsive mt-4"  id='subjRecords'>
+            <h2 style="font-size: 30px;" class='mt-5'>Our Courses</h2>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Course Name</th>
+                  <th>Total Students</th>
+                  <th>Teacher assigned</th>
+                  <th>Total Lectures</th>
+                  <th>Slug</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in courses %}
+                <tr>
+                  <td></td>
+                  <td>{{course.name}}</td>
+                  <td>{{course.totStudents}}</td>
+                  <td>{{course.teacher}}</td>
+                  <td>{{course.totLectures}}</td>
+                  <td>{{course.slug}}</td>
+                  
+  
+                  
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            </div>
+            <a class='btn btn-primary mb-4 ' href='/accounts/addCourse'>Start New Course</a>
+            
+  
+
+            <div class="table-responsive mb-4 mt-4"  id='subjRecords'>
+              <h2 style="font-size: 30px;" class='mt-5'>Our Subjects</h2>
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    <th>Teacher assigned</th>
+                    <th>Total Lectures</th>
+                    <th>Slug</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for subject in subjects %}
+                  <tr>
+                    <td></td>
+                    <td>{{subject.name}}</td>
+                    <td>{{subject.teacher}}</td>
+                    <td>{{subject.totLectures}}</td>
+                    <td>{{subject.slug}}</td>
+                    
+    
+                    
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
+  
+
+
+
+
+            <div class="table-responsive mb-4 mt-4"  id='contactRecords'>
+              <h2 style="font-size: 30px;" class='mt-5'>Reviews and Messages</h2>
+              <table class="table table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for contact in contacts %}
+                  <tr>
+                    <td>{{contact.id}}</td>
+                    <td>{{contact.fname}} {{contact.lname}}</td>
+                    <td>{{contact.email}}</td>
+                    <td>{{contact.contact}}</td>
+                    <td>{{contact.message}}</td>
+                    
+    
+                    
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
+  
+
+
+        </div>
+
+  
+
+
+      </main>
+      </div>
+      </div>
+      
+            
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
