@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+  int a, balance=20000, withdraw, add, confirm;
+  
+  while (1){
+    printf("Choose an option:\n");
+    printf("1. Check Balance\n2. Deposit Money\n3. Withdraw money\n4. Exit\n");
+    scanf("%d", &a);
+  
+    if (a == 1){
+      printf("Your current balance is : %d\n", balance);
+      // break;
+    }
+    else if (a == 2){
+      printf("Enter the amount you want to deposit : \n");
+      scanf("%d", &add);
+      balance = balance + add;
+      printf("The current balance is %d\n", balance);
+    }
+    else if (a == 3){
+      printf("Enter the amount you want to Withdraw : \n");
+      scanf("%d", &withdraw);
+      balance = balance - withdraw;
+      printf("The current balance is %d\n", balance);
+    }
+
+    else if (a == 4){
+      printf("Are you sure you want to exit (1/0)\n");
+      scanf("%d", &confirm);
+      if (confirm == 1){
+        printf("thanks for using our ATM\n");
+        break;
+      }
+      else if (confirm == 0){
+        continue;
+      }
+    }
+    else{
+      printf("Invalid Command\n");
+    }
+  }
+  return 0;
+}
