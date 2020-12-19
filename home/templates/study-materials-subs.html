@@ -1,0 +1,191 @@
+{% extends 'layout.html' %}
+{% block title %}Study Materials{% endblock %}
+{% block body %}
+
+
+{% block css %}
+<style>
+  #main{
+    transition: 0.5s;
+  }
+    a:hover{
+       text-decoration: none; 
+    }
+    .hov:hover{
+      background-color: initial;
+    }
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+    #sidenav-btn{
+        top: 20%;
+    }
+
+    .navv {
+        text-decoration: none;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    hr{
+        color: #818181;
+    }
+    .navbar{
+        box-shadow: 10px 10px 10px rgb(73, 73, 73);
+    }
+    .subss:hover{
+  animation: shake 0.5s;
+ }
+
+ @keyframes shake {
+  50% { transform: translate(0px, -15px) rotate(0deg); }
+}
+
+
+    .navv:hover {
+        color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+    #navbtnlogin{
+        display: none;
+    }
+    #search-div{
+      margin-left: 38%;
+      width: 25%;
+    }
+    
+    @media (max-width: 575.98px) {
+        #navbtnlogin {
+            display: flex;
+        }
+        #search-box{
+          display: none;
+        }
+        #search-btn{
+          display: none;
+        }
+   
+
+    #search-div{
+      margin-left: 25%;
+      width: 70%;
+    }
+    }
+
+    @media (max-width: 457px) {
+      #add-student-btn {
+          margin-top: 10px;
+        }
+        #search-box{
+          display: none;
+        }
+        #search-btn{
+          display: none;
+        }
+    #search-div{
+      margin-left: 25%;
+      width: 60%;
+    }
+    }
+    @media (max-width: 770px) {
+      #search-div{
+      margin-left: 17%;
+      width: 70%;
+    }
+    }
+</style>
+{% endblock %}
+
+
+
+<button style="font-size:15px;cursor:pointer; border-radius: 30px;" onclick="navbarVisible()" class="mr-5 btn btn-dark fixed" id='sidenav-btn'><i class="fas fa-arrow-circle-right"></i></button>
+
+    <!-- the side navbar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn mt-24 text-light" onclick="closeNav()">&times;</a>
+        <hr>
+        <p class="mt-24 ml-5 navv text-lg text-light" href="">All Subjects</p>
+        <hr>
+        {% for subject in subjects %}
+        <a class="my-3 ml-5 navv" href="/courses/{{subject.slug}}">{{subject.name}}</a>
+        {% endfor %}
+        <hr>
+        <hr>
+    </div>
+
+<section class="text-gray-700 body-font mt-5 " id='maincontent'>
+    <div class="container px-5 py-24 mx-auto">
+      <div class="text-center mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">{{name}}</h1>
+        <img src="/static/img/study.svg" class='mx-auto mb-5' alt="">
+
+        <form action="/search/study-materials-subs" class='form-inline' methdo='GET'>
+          <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">We provide you the best study materials prepared by the best teachers. The contents are also available on YouTube. Here, all the chapters of all subjects are listed below. You can choose to view the chapters of one specific subject by clicking on the side navigation bar on the left side.<br>
+            <input type="text" class='form-control mt-4' placeholder="Search any topic" name='search'><button class='btn btn-dark  mt-4 ml-2'>Search</button>
+          </p>
+        </form>
+
+      </div>
+      <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+        {% for chapter in chapters %}
+        <div class="p-2 sm:w-1/2 w-full subss">
+          <a href='/courses/{{chapter.subjSlug}}/{{chapter.slug}}'>
+          <div class="bg-gray-200 rounded flex p-4 h-full items-center" style='box-shadow: 5px 5px 5px  rgb(184, 181, 181);'>
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+              <path d="M22 4L12 14.01l-3-3"></path>
+            </svg>
+            <span class="title-font font-medium">{{chapter.name}}</span>
+          </div>
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <script>
+    function navbarVisible() {
+        let nav = document.getElementById("mySidenav");
+        let main = document.getElementById('maincontent');
+        let footer = document.getElementById('footer');
+        main.style.transition = "all 0.5s"
+        footer.style.transition = "all 0.5s"
+        main.style.marginLeft = "300px"
+        nav.style.width = "300px";
+        footer.style.marginLeft = "300px";
+    }
+
+
+    function closeNav() {
+        let nav = document.getElementById("mySidenav");
+        let main = document.getElementById('maincontent');
+        let footer = document.getElementById('footer');
+        nav.style.width = "0px";
+        footer.style.marginLeft = "0";
+        main.style.marginLeft = "0";
+    }
+
+  </script>
+
+{% endblock %}

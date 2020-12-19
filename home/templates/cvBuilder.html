@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">    
+
+    <!-- W3 CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <style>
+        img{
+            height: 200px;
+            width: 200px;
+        }
+        .left-column{
+            text-align: right;
+            font-weight: bold;
+        }
+        .messageboxes{
+            display: block;
+            position: absolute;
+            top: 20%;
+            left: 33%;
+            width: 35%;
+        }
+    </style>
+
+</head>
+<body class='container w-75'>
+    <h1><strong><p class='text-center bg-dark text-white p-3'>CURRICULUM VITAE</p></strong></h1>
+    <div style="font-size: 15px;">
+        <div class='d-flex mt-5'>
+            <div class='ml-5 mr-5'>
+                <img src="/media/{{img}}" alt="">
+            </div>
+
+            <div class='mx-auto d-flex'>
+                <ul class='mt-3'>
+                    <li><strong>Name: </strong></li>
+                    <li><strong>Contact: </strong></li>
+                    <li><strong>Email: </strong></li>
+                    <li><strong>Address: </strong></li>
+                    <li><strong>Permanent Address </strong></li>
+                    <li><strong>Father's Name: </strong></li>
+                    <li><strong>Mother's Name: </strong></li>
+                    <li><strong>Date of Birth: </strong></li>
+                    <li><strong>Nationality: </strong></li>
+                    <li><strong>Religion: </strong></li>
+                    <li><strong>Blood Group: </strong></li>
+                </ul>
+                <ul class='mt-3 ml-5'>
+                    <li>: {{name}}</li>
+                    <li>: {{contact}}</li>
+                    <li>: {{email}}</li>
+                    <li>: {{address}}</li>
+                    <li>: {{p_address}}</li>
+                    <li>: {{fname}}</li>
+                    <li>: {{mname}}</li>
+                    <li>: {{birthdate}}</li>
+                    <li>: {{nationality}}</li>
+                    <li>: {{religion}}</li>
+                    <li>: {{bloodgroup}}</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class='bg-dark mt-24'>
+            <h3 class='text-center text-white p-2'><strong>CAREER OBJECTIVE</strong></h3>
+        </div>
+        <div>
+            <p class='mx-5 mb-4'>
+                {{job_obj}} 
+            </p>
+        </div>
+
+        <div class='bg-dark mt-5'>
+            <h3 class='text-center text-white p-2'><strong>EDUCATIONAL BACKGROUND</strong></h3>
+        </div>
+        <div>
+            <table class='table table-striped'>
+                <tr>
+                    <th>Name of Degree</th>
+                    <th>Institution/Board</th>
+                    <th>Result</th>
+                    <th>Year</th>
+                </tr>
+                {% for edu in edus %}
+                <tr>
+                    <td>{{edu.0}}</td>
+                    <td>{{edu.1}}</td>
+                    <td>{{edu.2}}</td>
+                    <td>{{edu.3}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        <div class='d-flex mt-5'>
+            <div class='w-100'>
+                <div class='bg-dark'>
+                    <h3 class='text-center text-white p-2'><strong>SKILLS</strong></h3>
+                </div>
+    
+                <ul class='ml-16' style="list-style-type:disc;">
+                    {% for skill in skills %}
+                    <li class='my-3'><strong>{{skill}}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div style='margin-left: 100px; width: 100%;'>
+                <div class='bg-dark ml-5'>
+                    <h3 class='text-center text-white p-2'><strong>JOB EXPERIENCE</strong></h3>
+                </div>
+    
+                <ul class='ml-24' style="list-style-type:disc;">
+                    {% for expp in exp %}
+                    <li class='my-3'><large>{{expp}}</large></li>
+                    {% endfor %}
+                </ul>
+
+                <div style="margin-top: 170px; margin-left: 300px; text-align: right;">
+                    ____________________________
+                    <strong>{{name}}</strong> <br>
+                    Applicant
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    {% if messages %}
+    {% for message in messages %}
+  <div class='messageboxes alert alert-success px-5 animate__animated animate__bounceInDown' id='alertbox' style="box-shadow: 10px 10px 10px 5px rgb(95, 94, 94); border-radius: 50px;">
+    <strong>
+      <button type="button" class="close" onclick='raiseAlert()'>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class='text-xl'>YOUR CV IS CREATED SUCCESSFULLY!</p>
+      <hr>
+      <p class='mb-3'>{{message}}</p>
+    </strong>
+  </div>
+  {% endfor %}
+  {% endif %}
+  
+  
+</body>
+
+<script>
+  function raiseAlert(){
+    var alertbox = document.getElementById('alertbox');
+    alertbox.style.transition = 'all 0.5s'
+    alertbox.style.display = 'none'
+    }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var url = 'http://127.0.0.1:5001/GUI-is-still-open'; 
+    fetch(url, { mode: 'no-cors'});
+    setInterval(function(){ fetch(url, { mode: 'no-cors'});}, 5000)();
+    });
+    
+</script>
+
+
+</html>

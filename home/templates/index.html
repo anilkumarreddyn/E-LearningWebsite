@@ -1,1 +1,395 @@
+{% extends 'layout.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
 
+{% block css %}
+<style>
+  .messageboxes{
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 33%;
+    width: 35%;
+  }
+  .feature-img{
+    height:400px
+  }
+  /* .navbar{
+        box-shadow: 10px 10px 10px rgb(0, 0, 0);
+    }
+ */
+ #contact2{
+  box-shadow: 5px 5px 5pc grey;
+
+ }
+
+ .notices{
+   
+  box-shadow: 5px 5px 2pc rgb(59, 59, 59);
+ }
+
+
+ .parallax {
+  /* The image used */
+  background-image: url("/static/img/quizbg.jpg");
+
+  /* Set a specific height */
+  height: 200px;
+  filter: brightness(50%);
+  
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+ .notices:hover{
+  animation: shake 1s;
+ }
+ #contact2:hover{
+  animation: shake 1s;
+ }
+
+ @keyframes shake {
+  50% { transform: translate(0px, -35px) rotate(0deg); }
+}
+  @media (max-width: 427px) {
+    .messageboxes{
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 90%;
+  }
+
+}
+
+
+@media (max-width: 320px) {
+  #maincontent{
+    margin-top: 370%;
+  }
+
+}
+
+@media (max-width: 375px){
+  #imgg{
+    display:none
+  }
+}
+
+@media (max-width:1125px) {
+  #imgg{
+    display:none
+  }
+  /* #contact2{
+    width: 90%;
+  } */
+}
+
+
+@media (min-width: 375px) {
+  #maincontent{
+    margin-top: 280%;
+  }
+}
+@media (min-width: 425px) {
+  #maincontent{
+    margin-top: 200%;
+  }
+
+}
+@media (min-width: 768px) {
+  #maincontent{
+    margin-top: 40%;
+  }
+
+}
+@media (min-width: 1024px) {
+  #maincontent{
+    margin-top: 7%;
+  }
+
+}
+
+
+
+
+</style>
+{% endblock %}
+
+          <!-- The carousel -->
+          <div id="myCarousel" class="carousel slide mt-16 pt-4 animate__animated animate__fadeInDown" data-ride="carousel">
+            <!-- the scrolling of the latest news and the notice Board -->
+          
+          <!-- <div class=" w-100 ">
+            <div class="row">
+            <div class="alert alert-dark" role="alert">
+            <strong><i class="fa fa-warning"></i>Notice</strong> <marquee><p style="font-family: Impact; font-size: 18pt">{% for notice in notices %}{{notice.title}}<i class="fas fa-star mx-2"></i>{% endfor %}</p></marquee>
+          </div>
+            </div>
+          </div> -->
+
+
+            <ol class="carousel-indicators mb-24 pb-24">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+        
+              <div class="carousel-item active w-100">
+                <img src="/static/img/study5.jpg" alt="" style='filter: brightness(40%); width: 100%;'>
+                <div class="container">
+                  <div class="carousel-caption text-left mb-24 pb-24">
+                    <h1>Teaching Staff</h1>
+                    <p>We teach our students with utmost dedication and professionalism. We have an experienced staffs of teachers and tutors who teaches the students sincerely and professionally.</p>
+                    <p><a class="btn btn-lg btn-primary" href="/accounts/teacher-reg" role="button">Join as a Teacher</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item w-100">
+                <img src="/static/img/quizbg3.jpg" alt="" style='filter: brightness(50%); width: 100%;'>
+                <div class="container">
+                  <div class="carousel-caption mb-24 pb-24">
+                    <h1>Amazing Online Contents.</h1>
+                    <p>we provide our students with online amazing contents for study. We provide suggessions, question banks, quizzes and class notes on various topics. Our premium versions includes the premium suggessions from expert teachers.</p>
+                    <p><a class="btn btn-lg btn-primary" href="/accounts/register" role="button">Join as a student</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="/static/img/study3.jpg" alt="" style='filter: brightness(30%); width: 100%;'>
+                <div class="container">
+                  <div class="carousel-caption text-right mb-24 pb-24">
+                    <h1>Online Newsletter.</h1>
+                    <p>We love to inform you about our current status and notices. Get yourself updated on our latest news and notices via email.
+                      <form action="/newsletter" method='get' class='form w-50 ml-auto'>
+                        <input type="text" class='form form-control' placeholder='Email Address' name='email'>
+                        <button class=' mt-3 btn btn-primary btn-lg'>Subscribe</button>
+                      </form>
+                    </p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>  
+
+
+
+          <div class='container mx-auto'>
+          <div class="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 container" style="position: absolute; top: 80%">
+            {% for notice in notices|slice:"0:3" %}
+            <div class="p-4 md:w-1/3 md:mb-0 mb-6 flex flex-col text-center items-center">
+              <!-- box-shadow: 5px 5px 5px  rgb(184, 181, 181); -->
+              <div class="flex-grow bg-white p-5 bg-gray-300 notices">
+                <i class="{{notice.icons}} fa-5x"></i>
+                <h2 class="text-gray-900 text-lg title-font font-medium mb-3"><strong>{{notice.title}}</strong></h2>
+                <p class="leading-relaxed text-base">{{notice.desc}}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+
+
+
+<!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing mt-24 pt-24" id='maincontent'>
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Amazing Online Contents <span class="text-muted">It’ll blow your mind.</span></h2>
+        <p class="lead">My institution, Creative Scholars Academic Care is a dream to me. i teach
+          my students here in this academy with great care and affection. The classrooms are well
+          decorated for children and I can guarantee the complete enjoyment of my students here in the
+          classrooms.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="/static/img/onlineContent.svg" class='feature-img p-5' alt="" srcset="" style='box-shadow: 5px 5px 5pc grey;'>
+      </div>
+    </div>
+    <!-- <div class="parallax mt-24"></div> -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Talented Teaching Staff. <span class="text-muted">See for yourself.</span></h2>
+        <p class="lead">I provide quality study materials online and make sure that the students are
+          getting proper notes and guidelines for their exams. I provide lecture-videos as well as PDF
+          files as documents for them to revise at home. I also tutor them online.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="/static/img/teacher.svg" class='feature-img p-5' alt="" srcset="" style='box-shadow: 5px 5px 5pc grey;'>
+      </div>
+    </div>
+<!-- 
+    <div class="parallax mt-24"></div> -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">My dream institution. <span class="text-muted">It'll always be my dream.</span></h2>
+        <p class="lead">My institution, Creative Scholars Academic Care is a dream to me. i teach
+          my students here in this academy with great care and affection. The classrooms are well
+          decorated for children and I can guarantee the complete enjoyment of my students here in the
+          classrooms.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="/static/img/dream.svg" class='feature-img p-5' alt="" srcset="" style='box-shadow: 5px 5px 5pc grey;'>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+  
+  <!-- the alert boxes -->
+  {% if messages %}
+  {% for message in messages %}
+<div class='messageboxes alert alert-success px-5 animate__animated animate__bounceInDown' id='alertbox' style="box-shadow: 10px 10px 10px 5px black;">
+  <strong>
+    <button type="button" class="close" onclick='raiseAlert()'>
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p class='text-xl'>SUCCESS!</p>
+    <hr>
+    <p class='mb-3'>{{message}}</p>
+  </strong>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<section class="text-gray-700 body-font overflow-hidden">
+  <div class="container pb-24 mx-auto">
+    <div class="flex flex-wrap -m-12">
+      <!-- <div class="md:w-1/2 flex flex-col items-start" id='imgg'> -->
+        <img src="/static/img/contactimg.svg" alt="" style="width: 100%;" id='imgg'>
+      <!-- </div> -->
+
+      <!-- <div class="p-12 md:w-1/2 flex flex-col items-start"> -->
+        <form class=" w-75 mt-5 p-16 ml-24 mx-auto bg-white" method='POST', action="/#contact" id='contact2'>
+          {% csrf_token %}
+          <p class="text-gray-900 text-lg font-medium text-center mb-5" style="font-size: 30px;">Leave us a message </p>
+          {% if messages %}
+          {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% else %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+  
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                First Name
+              </label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" name='fname' required>
+              <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                Last Name
+              </label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" name="lname" placeholder="Doe" required>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                Email Address
+              </label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" name="email" placeholder="example@email.com" required>
+              <p class="text-gray-600 text-xs italic">Enter your Email here</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-contact">
+                Contact
+              </label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-contact" type="tel" name='contact' placeholder="8801xxxxxxxxx" required>
+              <p class="text-gray-600 text-xs italic">Enter your contact here</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-msg">
+                Your Message
+              </label>
+              <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-msg" type="text" name='message' placeholder="Your message goes here" required></textarea>
+              <p class="text-gray-600 text-xs italic">Enter your message here</p>
+            </div>
+          </div>
+      
+          <p class='text-center'><button class='btn btn-lg btn-danger btn-rounded mt-3' style='border-radius: 20px; box-shadow: 5px 5px 10px rgb(77, 75, 75), inset -5px -10px 10px rgb(133, 11, 11);'>Submit</button></p>
+        </form>
+      <!-- </div> -->
+    </div>
+  </div>
+</section>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+
+
+
+
+
+
+
+{% block js %}
+
+
+<script>
+  function raiseAlert(){
+    var alertbox = document.getElementById('alertbox');
+    alertbox.style.transition = 'all 0.5s'
+    alertbox.style.display = 'none'
+    }
+
+    var image = document.getElementsByClassName('thumbnail');
+    new simpleParallax(image);  
+</script>
+{% endblock %}
+
+{% endblock %}

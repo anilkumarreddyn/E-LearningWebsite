@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+{% block body %}
+{% block title %}Admission Form{% endblock %}
+{% block css %}
+<style>
+  body{
+    /* background-image: url('/static/img/homebg5.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    
+  }
+  .navbar{
+    box-shadow: 10px 10px 10px rgb(80, 81, 82);  
+  }
+
+  #mainform{
+    box-shadow: -5px -5px 10px rgb(201, 201, 196), 5px 5px 10px rgb(177, 175, 175), inset -10px -10px 10px rgb(146, 146, 144); border-radius: 50px;
+  }
+
+  #coursesdiv{
+    overflow-y: auto;
+    height: 300px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    #mainform{
+    box-shadow:none;
+  }
+  #imgg{
+    display: none;
+  }
+
+  }
+
+</style>
+{% endblock %}
+
+
+
+
+
+<section class="text-gray-700 body-font overflow-hidden">
+  <div class="container px-5 py-5 mx-auto">
+
+    <div class="flex flex-wrap -m-12">
+      <!-- <img src="/static/img/admission.svg" alt="" id='imgg'> -->
+      <div class="p-12 md:w-1/2 flex flex-col items-start">
+        
+        <img src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-04.png" alt="" style='margin-top: 10%;'>
+
+      </div>
+      <div class="p-12 md:w-1/2 flex flex-col items-start">
+        <div class='container my-5 py-5'>
+          <form class="w-full max-w-lg  bg-white p-8 animate__animated animate__fadeInDown" id='mainform' method='POST' action='/enrollment/{{user.username}}'>
+            {% csrf_token %}
+            <p class='mb-2 text-lg mx-auto text-center'><strong>Admission Form</strong></p>
+            <p class='text-lg mb-5 text-center'>Select the courses of  your choice and the version, and click the button below to make payment and enroll in the course.</p>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% else %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            <div class="flex flex-wrap -mx-3 mb-2">
+              <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
+                  Version of Study
+                </label>
+                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-username" type="text" name='version' required>
+                    <option value="">--Select Version--</option>
+                    <option value="ev">English</option>
+                    <option value="bv">Bangla</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
+                  Subject
+                </label>
+                <select  onchange="showPrice()" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="courseName" type="text" name='subject' style="overflow-y: auto;" required>
+                  <option value="">-- Select a Subject --</option>
+                  {% for subject in subjects %}  
+                  <option value="{{subject.slug}}" id='id{{forloop.counter}}'>{{subject.name}} @ &#2547 {{subject.price}}</option>  
+                  <!-- <script>
+                    function showPrice(){
+                      var list = []
+                      var x = document.getElementById('courseName').nodeValue
+                      document.getElementById('price').innerHTML = '{{subject.price}}'
+
+                    }
+                  </script> -->
+
+
+                  {% endfor %}
+
+                </select>
+              </div>
+            </div>
+            <!-- <div class="flex flex-wrap -mx-3 mb-6">
+              <div class='mx-auto block w-75 bg-success text-white py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500' style='border-radius: 50px; box-shadow: 5px 5px 10px rgb(77, 75, 75), inset -10px -20px 10px rgb(24, 75, 8);'>
+                <p class='text-center' id='price'><strong>&#2547 5000/-</strong></p>
+              </div>
+            </div> -->      
+              <p class='text-center'>
+              <button class='btn btn-lg btn-danger btn-rounded mt-3' style='border-radius: 20px; box-shadow: 5px 5px 10px rgb(77, 75, 75), inset -5px -10px 10px rgb(133, 11, 11);'>Pay and Enroll</button>
+            </p>
+          </form>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

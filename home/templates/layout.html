@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">    
+
+    <!-- W3 CSS -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    
+    <!-- Custom CSS -->
+    <style>
+                /* GLOBAL STYLES
+        -------------------------------------------------- */
+        /* Padding below the footer and lighter body text */
+        body{
+    box-shadow: inset 0 0 1000px rgb(0, 0, 0);
+  }
+
+        body {
+        color: #000000;
+        }
+        html{
+          scroll-behavior: smooth;
+        }
+        body{
+    /* background-image: url('static/img/teachers1.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    
+  }
+
+
+        /* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.marketing h2 {
+  font-weight: 400;
+}
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05rem;
+}
+.navbar{
+  /* box-shadow: 10px 10px 10px rgb(49, 48, 48); */
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+
+        
+img{
+    height: 550px;
+}
+
+
+
+
+
+    .bd-placeholder-img {
+font-size: 1.125rem;
+text-anchor: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+    
+
+                
+
+@media (max-width: 768px) {
+    .dropdown-menu{
+    font-size: 15px;
+}
+
+
+}
+
+
+        </style>
+      
+
+<title>{% block title %}{% endblock %} - Imperia Education</title>
+
+</head>
+<body>
+
+
+
+        <!-- the navbar -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+            <a class="navbar-brand mx-auto px-3" href="#" style="font-family: copperplate gothic bold; font-size: 30px;">Imperia</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="/courses">Study Materials</a>
+                </li>
+                {% if user.is_superuser %}
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="/enrollment/{{user.username}}">Online Admission</a>
+                </li> -->
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/enrollment/{{user.username}}">Online Admission</a>
+                </li>
+                {% endif %}
+                  <li class="nav-item w3-dropdown-hover">
+                    <a class="nav-link dropdown-toggle" href="#" id="examDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Online Exam and Quiz
+                    </a>
+                    <div class="w3-dropdown-content w3-bar-block w3-card-4" aria-labelledby="examDropdown">
+                        <a class="dropdown-item" href="/quiz/mini_quiz/{{request.user.username}}">Mini Quiz (20 Marks)</a>
+                        <a class="dropdown-item" href="/quiz/mega_quiz/{{request.user.username}}">Mega Quiz (50 marks)</a>
+                        <a class="dropdown-item" href="/quiz/ultra_quiz/{{request.user.username}}">Ultra Quiz (100 Marks)</a>
+                    </div>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="/accounts/teacher-reg">Teachers' Corner</a>
+                </li>
+                <li class="nav-item w3-dropdown-hover">
+                  <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Other Services
+                  </a>
+                  <div class="w3-dropdown-content w3-bar-block w3-card-4" aria-labelledby="serviceDropdown">
+                      <a class="dropdown-item" href="/other-services/cvBuilderIntro">CV/Resume Builder</a>
+                      <a class="dropdown-item" href="">Letter Writer</a>
+                      <a class="dropdown-item" href="">Translator</a>
+                  </div>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link mx-2" href="/#contact2">Contact Us</a>
+                </li>
+                {% if user.is_authenticated %}
+                {% if user.username == 'admin' %}
+                <li class="nav-item">
+                  <a class="nav-link btn btn-success px-3 mx-2 text-white"  data-toggle="tooltip" data-placement="bottom" title="Your Profile" href="/accounts/adminPanel" style='border-radius: 25px;  box-shadow: inset -5px -10px 10px rgb(12, 77, 6);'>Admin</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link btn btn-success px-3 mx-2 text-white"  data-toggle="tooltip" data-placement="bottom" title="Your Profile" href="/accounts/user-dashboard/{{user.username}}" style='border-radius: 25px;  box-shadow: inset -5px -10px 10px rgb(10, 66, 5);'>{{user.first_name}}</a>
+                </li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link mx-2" href="/accounts/login">Login</a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+
+
+
+{% block body %}{% endblock %}
+
+
+  <!-- FOOTER -->
+  <!-- <h1 class="jumbotron-heading"><span id="typed"></span></h1> -->
+  <footer class="text-gray-500 bg-black body-font" id='footer'>
+    <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
+      <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="ml-3 text-xl">Imperia Educations Ltd.</span>
+        </a>
+        <p class="mt-2 text-sm text-gray-700">We provide the best sources of knowledge.</p>
+      </div>
+      <div class="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">Links</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-white">Enrollment</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Study Materials</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Online Exams</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Teachers Corner</a>
+            </li>
+          </nav>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <h2 class="title-font font-medium text-white tracking-widest text-sm mb-3">Links</h2>
+          <nav class="list-none mb-10">
+            <li>
+              <a class="text-gray-600 hover:text-white">Make a CV</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Letter Writer</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Translator</a>
+            </li>
+            <li>
+              <a class="text-gray-600 hover:text-white">Register</a>
+            </li>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-800">
+      <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+        <p class="text-gray-600 text-sm text-center sm:text-left">© 2020 Imperia Educations Ltd. —
+          Developed by <a href="https://www.facebook.com/abirs.empire17610976/" class="text-gray-500 ml-1" rel="noopener noreferrer" target="_blank">Abir Al Mahdi</a>
+        </p>
+        <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+          <a class="text-gray-600">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-600">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-600">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-600">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+              <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js" async defer></script>
+    <script>
+
+      // document.addEventListener('DOMContentLoaded', function() {
+      
+      //     var url = 'http://127.0.0.1:5001/GUI-is-still-open'; 
+      //     fetch(url, { mode: 'no-cors'});
+      //     setInterval(function(){ fetch(url, { mode: 'no-cors'});}, 5000)();
+      
+      // });
+      
+    </script>
+    <script>
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
+    
+      window.onload = function () {
+          console.log("loaded")
+          var typed = new Typed('#typed', {
+              strings: ["Welcome to CodeWithHarry", "Learn Python", "Web development", "Data Science", "Machine Learning", "and other awesome programming concepts with me :)"],
+              backSpeed: 15,
+              smartBackspace: true,
+              backDelay: 1200,
+              startDelay: 1000,
+              typeSpeed: 25,
+              loop: true,
+          });
+      };
+  </script>
+
+</body>
+</html>

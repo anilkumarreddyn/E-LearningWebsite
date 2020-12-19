@@ -1,0 +1,182 @@
+{% extends 'layout.html' %}
+{% load custom_tags %}
+{% block title %}Quiz{% endblock %}
+{% block body %}
+{% block css %}
+<style>
+    body {
+        background-image: url('/static/img/quizbg2.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100%;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .navbar {
+        box-shadow: none;
+    }
+    .mySlide{
+        box-shadow: 5px 5px 10px 10px rgb(36, 35, 35);
+        margin-top: 5%;
+        /* margin-bottom: 25%; */
+        display: none;
+        margin-left: 45%;
+        padding-bottom: 5%;
+        padding-top: 5%;
+        width: 50%;
+        opacity: 80%;
+        background-color: rgba(255, 255, 255, 0.425);
+        border-radius: 100px;
+    }
+    #timer{
+        margin-top: 10%;
+        border-radius: 500px; font-size: 35px;
+        padding-left: 5%;
+        width: 20%;
+    }
+
+    .op-buttons{
+        margin-left: 10%;
+    }
+    @media (max-width: 1030px) {
+        .mySlide{
+            width: 90%;
+            margin-top: 15%;
+            margin-left: 5%;
+            border-radius: 50px;
+        }
+        #timer{
+            margin-top: 25%;
+            padding-left: 1%;
+            width: 20%;
+        }
+        body{
+            background-image: url('/static/img/quizbg3.jpg'); ;
+        }
+
+}
+
+</style>
+{% endblock %}
+
+
+
+<div class="">
+
+    <div class='container mb-5'>
+        <div class='bg-gray-200 text-dark mx-auto mt-24' id='timer'></div>
+        {% for i in questions2 %}
+        <form action="/quiz/miniQuiz/{{course}}/{{slug}}/{{user.username}}" method="post" class='form text-center' id='quesForm'>
+            {% csrf_token %}
+            <div class="animate__animated animate__fadeInLeft mySlide ">
+                <p class='text-center text-lg p-5 text-white' style='font-size: 30px;'><strong>{{i.1}}</strong></p>
+                <div id='idno{{forloop.counter}}' style='display: none;'>{{i.0}}</div>
+                
+                    <select class='form form-control w-1/2 mx-auto' name="answer{{forloop.counter}}" id="answer{{forloop.counter}}">
+                        <option value="no answer">Select an Answer</option>
+                        {% for keys, values in i.4.items %}
+                        <option value="{{keys}}">{{values}}</option>
+                        {% endfor %}
+                    </select>
+            
+            </div>
+            <input type="text" id="backend" name='backend' style="display: none;">
+        </form>
+        {% endfor %}
+        <p class="op-buttons text-center mb-24 pb-24">
+            <button type="submit" class='btn bg-green-700 hover:bg-green-800 text-white border-green-900 btn-lg mt-4' style='border-radius: 20px;'>Submit</button>
+            <button class='btn btn-danger border-red-900 btn-lg mt-4' style='border-radius: 20px;' onclick="plusSlides(1)">Skip</button>
+        </p>
+    </div>
+
+
+<div id='n'>{{n}}</div>
+
+</div>
+
+
+
+
+{% block js %}
+<script>
+var timeleft = 10;
+var nQues = 0;
+var slideIndex = 1;
+var l = {};
+var nn = parseInt(document.getElementById('n').innerHTML)
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+    nQues = nQues + 1
+    timeleft = 10
+    // console.log(document.getElementById('answer1').value)
+
+    for (i=1; i<=nn; i++) {
+        id = document.getElementById('idno'+i.toString()).innerHTML
+        ans = document.getElementById('answer'+ i.toString()).value
+        // console.log(document.getElementById('answer'+ i.toString()).value)
+        l[id] = ans
+
+        console.log(l) // the main array of the answers
+    }
+    document.getElementById('backend').value = JSON.stringify(l)
+    
+  showSlides(slideIndex += n);
+}
+
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlide");
+  if (n > slides.length) {
+    document.getElementById('quesForm').submit()
+  }
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  slides[slideIndex-1].style.display = "block";
+}
+
+
+var back = document.getElementById('backend');
+
+var downloadTimer = setInterval(function(){
+    document.getElementById("timer").innerHTML = timeleft + 's';
+  timeleft -= 1;
+
+   if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("answer").disabled = true;
+
+    document.getElementById("timer").innerHTML = "Time's Up!";
+    alert('Times up');
+    location.href="/";
+    // plusSlides(1);
+
+    }
+   
+    // if (timeleft <= 0){
+    //     document.getElementById("answer").disabled = true;
+
+    //     document.getElementById("timer").innerHTML = "Time's Up!";
+    //     alert('Times up');
+    //     // location.href="/";
+    //     plusSlides(1);
+    // }
+
+}, 1000);
+
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+{% endblock %}

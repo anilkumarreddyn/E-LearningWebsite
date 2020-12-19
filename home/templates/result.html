@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Result{% endblock %}
+{% block body %}
+
+<section class="text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+      <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="/static/img/result.svg">
+      <div class="text-center lg:w-2/3 w-full">
+        {% if status == 'Pass' %}
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-success"><strong>Congratulations! You have passed!</strong></h1>
+        {% elif status == 'Fail' %}
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-danger"><strong>Alas! You have failed!</strong></h1>
+        {% else %}
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-danger"><strong>Alas! You have failed</strong></h1>
+        {% endif %}
+        <h3 class=" leading-relaxed">You got <strong>{{point}}</strong> out of <strong>{{n}}</strong>. The percentage is <strong> {{point_percentage}}%</strong> Your total point is {{total_points}} and your success rate is {{successRate}}%</h3>
+        {% if status == 'Pass' %}
+        <h3 class="text-center text-success mb-8">Keep it up!</h3>
+        {% elif status == 'Fail' %}
+        <h3 class="text-center text-danger mb-8">Better luck next time!</h3>
+        {% else %}
+        <h3 class="text-center text-danger mb-8">Better luck next time!</h3>
+        {% endif %}
+
+          <a class="btn btn-dark btn-lg" href='/'>Go to Home</a>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'layout.html' %}
+{% block title %}Study Materials{% endblock %}
+{% block body %}
+
+{% block css %}
+<style>
+    .tab-content{
+        overflow-y: auto;
+        height: 400px;
+    }
+    #contentList{
+        display: none;
+    }
+    #commentList{
+        display: none;
+    }
+    #commentForm{
+        display: none;
+    }
+    
+</style>
+{% endblock %}
+
+<div>
+<section class="text-gray-700 body-font">
+    <div class="mt-24 mx-auto">
+      <div class="flex flex-wrap -m-4">
+
+        <div class="md:w-2/3 w-full">
+           
+          <div class="h-full bg-gray-200 rounded container videoContainer embed-responsive embed-responsive-16by9 px-3">
+            <iframe class='embed-responsive-item'
+            src="https://www.youtube.com/embed/{{content.0.videoID}}" allowfullscreen>
+            </iframe>
+          </div>
+      
+        </div>
+
+        <div class="md:w-1/3 w-full">
+          <div class="h-full bg-gray-200 rounded" id='content-holder'>
+
+            <ul class="nav nav-tabs pt-5 ml-6">
+                <li class="mx-2"><a data-toggle="tab" class='btn btn-danger' onclick="visibleVideos()">Videos</a></li>
+                <li class='mx-2'><a data-toggle="tab" class='btn btn-danger' onclick="visibleContents()">Notes</a></li>
+                <li class='mx-2'><a data-toggle="tab" class='btn btn-danger' onclick="visibleComments()">Comments</a></li>
+              </ul>
+            <div class='tab-content'>
+
+            <div id='videoList'>
+                <ul class='pt-4 px-4'>
+                    {% for con in content %}
+                    <a href="/courses/{{con.subjSlug}}/{{con.chapSlug}}/{{con.videoID}}">
+                        <li class="content-holder-item  active">
+                            {{forloop.counter}}. {{con.topic}} - {{con.chapname}}<i class="far fa-play-circle"></i>
+                                
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div id='contentList'>
+                <ul class='pt-4 px-4'>
+                    {% for con in content %}
+                    <a href="/media/{{con.pdf}}">
+                        <li class="content-holder-item  active">
+                            {{forloop.counter}}. Notes on {{con.topic}}
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div id='commentList'>
+                <ul class='pt-4 px-4'>
+                    {% for comment in comments %}
+                    <a>
+                        <li class="content-holder-item  active">
+                            {{comment}}
+                            <div class="mx-3">
+                                <i class="far fa-play-circle"></i> Free YouTube Video
+                            </div>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+             </div>
+            </div>
+            <form class="form-inline p-3" id='commentForm' action='/comment/{{content.0.subjSlug}}/{{content.0.chapSlug}}/{{content.0.videoID}}/{{user.username}}' method='GET'>
+                
+                {% if user.is_authenticated %}
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" class="form-control" id="comments" placeholder="Enter a comment here..." name='comment'>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Comment</button>
+                {% else %}
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="password" class="form-control" disabled id="comments" placeholder="Enter a comment here..."  data-toggle="tooltip" data-placement="top" title='Log in to comment on this video'>
+                </div>
+                <a class="btn btn-primary mb-2" data-toggle="tooltip" data-placement="top" title='Log in to comment on this video'>Comment</a>
+                {% endif %}
+            </form>            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+  <div class='pt-24 pb-24 bg-gray-200' style='width: 100%;'>
+    <p class='text-lg container text-muted' style='font-family: cambria; font-size: 30px;'><strong>{{content.0.chapname}}</strong></p>
+    <p class='text-lg container text-muted mb-3' style='font-family: calibri; font-size: 25px;'>{{content.0.topic}}</p>
+    <hr>
+    <p class='container mt-3'>{{content.0.desc}}</p>
+    <br><hr><br>
+    <p class='text-lg container' style='font-family: calibri; font-size: 20px;' ><a href='/media/{{content.0.pdf}}' class='text-primary'>Click here</a> to download the notes for this topic</p>
+</div>
+
+
+  {% block js %}
+  <script>
+      function visibleVideos() {
+          var vdo = document.getElementById('videoList');
+          var content = document.getElementById('contentList');
+          var comment = document.getElementById('commentList');
+          var commentForm = document.getElementById('commentForm');
+
+          vdo.style.display = 'block';
+          content.style.display = 'none';
+          comment.style.display = 'none';
+          commentForm.style.display = 'none'
+
+      }
+
+      function visibleContents() {
+          var vdo = document.getElementById('videoList');
+          var content = document.getElementById('contentList');
+          var comment = document.getElementById('commentList');
+          var commentForm = document.getElementById('commentForm');
+
+          vdo.style.display = 'none';
+          content.style.display = 'block';
+          comment.style.display = 'none';
+          commentForm.style.display = 'none'
+
+      }
+
+      function visibleComments() {
+          var vdo = document.getElementById('videoList');
+          var content = document.getElementById('contentList');
+          var comment = document.getElementById('commentList');
+          var commentForm = document.getElementById('commentForm');
+          
+          vdo.style.display = 'none';
+          content.style.display = 'none';
+          comment.style.display = 'block';
+          commentForm.style.display = 'flex'
+      }
+
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+  {% endblock %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% block css %}
+<style>
+    body{
+        background-image: url('static/img/feature1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+<div class="row">
+    <img src="/static/img/ques.svg" class='mx-auto mt-8  pt-24' alt="">
+
+    <div class="container mb-24 pb-24 mt-5" id="maindiv">
+        <p class="container">
+            <h1 class='text-center'>You are about to appear a Mini Quiz on <b>{{chap.name}}</b> of <b>{{course_elong.name}}</b><br>
+                <a href='/quiz/miniQuiz/{{course}}/{{slug}}/{{user.username}}' class="btn btn-danger btn-lg mt-5">Start -></a>
+            </h1>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
